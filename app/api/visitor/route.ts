@@ -5,36 +5,38 @@ export const runtime = "nodejs";
 
 const VISITOR_KEY = "hibiki:visitor-count";
 
-type RedisClient = ReturnType<typeof createClient>;
+let redisClient: ReturnType<typeof createClient> | null = null;
 
-let redisClient: RedisClient | null = null;
-
-async function getRedisClient(): Promise<RedisClient> {
+async function getRedisClient() {
   if (!process.env.REDIS_URL) {
     throw new Error("REDIS_URL environment variable is not configured.");
   }
 
-  if (!redisClient) {
-    const url = new URL(process.env.REDIS_URL);
-    const useTls = url.protocol === "rediss:";
-    const client = createClient(
-      useTls
-        ? {
-            url: url.toString(),
-            socket: {
-              tls: true,
-            },
-          }
-        : {
-            url: url.toString(),
-          },
-    );
-    client.on("error", (error) => {
-      console.error("Redis client error", error);
-    });
-    await client.connect();
-    redisClient = client;
+  if (redisClient) {
+    return redisClient;
   }
+
+  const url = new URL(process.env.REDIS_URL);
+  const useTls = url.protocol === "rediss:";
+
+  redisClient = createClient(
+    useTls
+      ? {
+          url: url.toString(),
+          socket: {
+            tls: true,
+          },
+        }
+      : {
+          url: url.toString(),
+        },
+  );
+
+  redisClient.on("error", (error) => {
+    console.error("Redis client error", error);
+  });
+
+  await redisClient.connect();
 
   return redisClient;
 }
@@ -42,8 +44,8 @@ async function getRedisClient(): Promise<RedisClient> {
 export async function GET() {
   try {
     const client = await getRedisClient();
-    const storedCount = await client.get(VISITOR_KEY);
-    const count = storedCount ? Number.parseInt(storedCount, 10) || 0 : 0;
+    const value = await client.get(VISITOR_KEY);
+    const count = value ? Number.parseInt(value, 10) || 0 : 0;
     return NextResponse.json({ count });
   } catch (error) {
     console.error("Failed to read visitor count", error);
