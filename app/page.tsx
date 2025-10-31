@@ -73,10 +73,10 @@ const features = [
 ];
 
 const contactLinks = [
-  { label: "Instagram", handle: "@aikomiyazaki.music", href: "#" },
+  { label: "Instagram", handle: "@hibiki.sound", href: "#" },
   { label: "Spotify", handle: "Listen on Spotify", href: "#" },
   { label: "YouTube", handle: "Live Sessions", href: "#" },
-  { label: "Management", handle: "booking@aikomiyazaki.com", href: "mailto:booking@aikomiyazaki.com" },
+  { label: "Management", handle: "booking@hibikimusic.com", href: "mailto:booking@hibikimusic.com" },
 ];
 
 function formatShowDate(dateString: string) {
@@ -101,13 +101,13 @@ export default function Home() {
               <span>Tokyo to Worldwide</span>
             </div>
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              Aiko Miyazaki
+              HIBIKI
               <span className="block text-lg font-normal text-white/70 sm:text-xl">
                 Silken vocals, analog warmth, twilight grooves.
               </span>
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-white/80">
-              Aiko blends jazz harmonies, late-night electronica, and noir film soundscapes into immersive live sets.
+              HIBIKI blends jazz harmonies, late-night electronica, and noir film soundscapes into immersive live sets.
               Each performance is shaped by live looping, improvised saxophone cameos, and minimalist lighting.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -154,7 +154,7 @@ export default function Home() {
               Sonic postcards from night cities and neon rain.
             </h2>
             <p className="text-base leading-relaxed text-white/80">
-              Raised between Kyoto's jazz kissaten bars and London's warehouse venues, Aiko crafts intimate narratives
+              Raised between Kyoto's jazz kissaten bars and London's warehouse venues, HIBIKI crafts intimate narratives
               that oscillate between confessional ballads and meditative grooves. Her latest work dives into modular
               synth improvisation paired with human stories scouted from midnight trains.
             </p>
@@ -271,7 +271,7 @@ export default function Home() {
         </section>
       </main>
       <footer className="relative border-t border-white/10 bg-black/40 py-10 text-center text-xs text-white/50">
-        <div>Aiko Miyazaki - Studio Nightfall (c) {new Date().getFullYear()}</div>
+        <div>HIBIKI - Studio Nightfall (c) {new Date().getFullYear()}</div>
       </footer>
     </div>
   );

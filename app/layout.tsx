@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aiko Miyazaki | Neo-Soul Musician",
+  title: "HIBIKI | Neo-Soul Musician",
   description:
-    "Official portfolio for Aiko Miyazaki: neo-soul vocalist, producer, and live performer crafting twilight soundscapes.",
+    "Official portfolio for HIBIKI: neo-soul vocalist, producer, and live performer crafting twilight soundscapes.",
 };
 
 export default function RootLayout({
