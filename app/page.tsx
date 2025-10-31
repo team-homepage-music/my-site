@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
 const releases = [
@@ -28,6 +31,13 @@ const releases = [
     highlights: ["NPR Tiny Desk Contest Finalist"],
     href: "#",
   },
+];
+
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Music", href: "#music" },
+  { label: "Shows", href: "#shows" },
+  { label: "Connect", href: "#connect" },
 ];
 
 const upcomingShows = [
@@ -87,12 +97,79 @@ function formatShowDate(dateString: string) {
 }
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-purple-600/60 via-fuchsia-500/40 to-amber-500/40 blur-3xl will-change-transform"
         aria-hidden
       />
+      <header className="relative z-30">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 pt-6 sm:px-10 lg:px-12">
+          <button
+            type="button"
+            onClick={toggleMenu}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-nav"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white transition hover:border-white/50 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <span className="sr-only">Toggle navigation</span>
+            <span
+              className={`block h-0.5 w-7 bg-white transition-transform duration-300 ${isMenuOpen ? "translate-y-2 rotate-45" : ""}`}
+            />
+            <span
+              className={`mt-1 block h-0.5 w-7 bg-white transition-opacity duration-300 ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
+            />
+            <span
+              className={`mt-1 block h-0.5 w-7 bg-white transition-transform duration-300 ${isMenuOpen ? "-translate-y-2 -rotate-45" : ""}`}
+            />
+          </button>
+          <nav className="hidden items-center gap-6 text-sm font-semibold text-white/80 lg:flex">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-full border border-transparent px-4 py-2 transition hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black/70 backdrop-blur-sm lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          onClick={closeMenu}
+        >
+          <nav
+            id="mobile-nav"
+            className="absolute left-6 right-6 top-24 rounded-3xl border border-white/20 bg-zinc-950/95 p-6 shadow-2xl shadow-black/60"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <ul className="space-y-3 text-lg font-semibold text-white/90">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={closeMenu}
+                    className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/5 px-5 py-3 transition hover:border-white/40 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                  >
+                    <span>{link.label}</span>
+                    <span className="text-sm text-white/60">-&gt;</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      )}
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-20 pt-20 sm:gap-20 sm:px-10 sm:pb-24 sm:pt-24 lg:gap-28 lg:px-12 lg:pt-32">
         <section className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="space-y-8">
