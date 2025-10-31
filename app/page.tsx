@@ -88,19 +88,19 @@ function formatShowDate(dateString: string) {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
       <div
-        className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-purple-600/60 via-fuchsia-500/40 to-amber-500/40 blur-3xl"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-purple-600/60 via-fuchsia-500/40 to-amber-500/40 blur-3xl will-change-transform"
         aria-hidden
       />
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-28 px-6 pb-24 pt-24 sm:px-12 md:pt-32">
-        <section className="grid gap-12 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-20 pt-20 sm:gap-20 sm:px-10 sm:pb-24 sm:pt-24 lg:gap-28 lg:px-12 lg:pt-32">
+        <section className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm uppercase tracking-[0.25em] text-white/80 backdrop-blur">
+            <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.25em] text-white/80 backdrop-blur-sm sm:text-sm">
               <span>Neo-Soul Musician</span>
               <span>Tokyo to Worldwide</span>
             </div>
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
               Aiko Miyazaki
               <span className="block text-lg font-normal text-white/70 sm:text-xl">
                 Silken vocals, analog warmth, twilight grooves.
@@ -113,20 +113,20 @@ export default function Home() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="#music"
-                className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow-lg shadow-purple-600/30 transition hover:-translate-y-0.5 hover:bg-zinc-100"
+                className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow-lg shadow-purple-600/30 transition hover:-translate-y-0.5 hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Listen to the Latest
               </Link>
               <Link
                 href="#shows"
-                className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white"
+                className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 See Upcoming Shows
               </Link>
             </div>
           </div>
           <div className="relative flex items-center justify-center">
-            <div className="relative h-80 w-80 overflow-hidden rounded-[32px] border border-white/20 bg-white/10 p-6 shadow-inner shadow-black/50 backdrop-blur">
+            <div className="relative h-64 w-full max-w-xs overflow-hidden rounded-[32px] border border-white/20 bg-white/10 p-6 shadow-inner shadow-black/50 backdrop-blur-sm sm:h-72 sm:max-w-sm lg:h-80 lg:w-80 lg:max-w-none">
               <div className="absolute inset-6 rounded-3xl bg-gradient-to-br from-purple-500 via-purple-300 to-amber-200 opacity-70 blur-3xl" />
               <div className="relative flex h-full w-full flex-col justify-between rounded-2xl bg-gradient-to-br from-zinc-950/90 via-zinc-900/70 to-purple-900/70 p-6">
                 <div className="text-sm uppercase tracking-[0.3em] text-white/60">Live Session</div>
@@ -163,7 +163,7 @@ export default function Home() {
               Expect candle-lit stages, tactile textures, and melodies that linger like half-remembered dreams.
             </p>
           </div>
-          <div className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-800/30 backdrop-blur">
+          <div className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-800/30 backdrop-blur-sm">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Highlights</p>
             <ul className="space-y-6">
               {features.map((feature) => (
@@ -183,11 +183,11 @@ export default function Home() {
               Music crafted for twilight listening.
             </h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {releases.map((release) => (
               <article
                 key={release.title}
-                className="group rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur transition hover:-translate-y-1 hover:border-white/40"
+                className="group rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur-sm transition hover:-translate-y-1 hover:border-white/40"
               >
                 <div className="mb-5 flex items-center justify-between text-sm uppercase tracking-[0.3em] text-white/60">
                   <span>{release.type}</span>
@@ -225,7 +225,7 @@ export default function Home() {
             {upcomingShows.map((show) => (
               <article
                 key={`${show.date}-${show.venue}`}
-                className="rounded-3xl border border-white/15 bg-gradient-to-br from-white/8 to-white/3 p-6 shadow-lg shadow-black/40 backdrop-blur transition hover:-translate-y-1 hover:border-white/35"
+                className="rounded-3xl border border-white/15 bg-gradient-to-br from-white/8 to-white/3 p-6 shadow-lg shadow-black/40 backdrop-blur-sm transition hover:-translate-y-1 hover:border-white/35"
               >
                 <div className="flex items-baseline justify-between text-xs uppercase tracking-[0.3em] text-white/60">
                   <span>{formatShowDate(show.date)}</span>
@@ -233,7 +233,7 @@ export default function Home() {
                 </div>
                 <h3 className="mt-4 text-2xl font-semibold text-white">{show.venue}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/70">{show.note}</p>
-                <button className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 transition hover:border-white">
+                <button className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 transition hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                   Reserve Tickets <span aria-hidden>*</span>
                 </button>
               </article>
@@ -243,7 +243,7 @@ export default function Home() {
 
         <section
           id="connect"
-          className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur md:p-12"
+          className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12"
         >
           <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-4">
@@ -260,7 +260,7 @@ export default function Home() {
               {contactLinks.map((link) => (
                 <li
                   key={link.label}
-                  className="flex items-center justify-between rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white"
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white"
                 >
                   <span>{link.label}</span>
                   <Link href={link.href}>{link.handle}</Link>
