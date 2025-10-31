@@ -108,14 +108,14 @@ export default function Home() {
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-purple-600/60 via-fuchsia-500/40 to-amber-500/40 blur-3xl will-change-transform"
         aria-hidden
       />
-      <header className="relative z-30">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 pt-6 sm:px-10 lg:px-12">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-30">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 pb-4 pt-6 sm:px-10 lg:px-12">
           <button
             type="button"
             onClick={toggleMenu}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white transition hover:border-white/50 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="pointer-events-auto inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white transition hover:border-white/50 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             <span className="sr-only">Toggle navigation</span>
             <span
@@ -128,7 +128,7 @@ export default function Home() {
               className={`mt-1 block h-0.5 w-7 bg-white transition-transform duration-300 ${isMenuOpen ? "-translate-y-2 -rotate-45" : ""}`}
             />
           </button>
-          <nav className="hidden items-center gap-6 text-sm font-semibold text-white/80 lg:flex">
+          <nav className="pointer-events-auto hidden items-center gap-6 text-sm font-semibold text-white/80 lg:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -170,7 +170,7 @@ export default function Home() {
           </nav>
         </div>
       )}
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-20 pt-20 sm:gap-20 sm:px-10 sm:pb-24 sm:pt-24 lg:gap-28 lg:px-12 lg:pt-32">
+      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-20 pt-32 sm:gap-20 sm:px-10 sm:pb-24 sm:pt-36 lg:gap-28 lg:px-12 lg:pt-40">
         <section className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="space-y-8">
             <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.25em] text-white/80 backdrop-blur-sm sm:text-sm">
