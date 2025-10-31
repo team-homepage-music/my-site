@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const releases = [
@@ -98,9 +98,44 @@ function formatShowDate(dateString: string) {
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [visitCount, setVisitCount] = useState<number | null>(null);
+  const hasIncremented = useRef(false);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    if (hasIncremented.current) {
+      return;
+    }
+    hasIncremented.current = true;
+
+    const syncVisitCount = async () => {
+      try {
+        const response = await fetch("/api/visitor", { method: "POST" });
+        if (!response.ok) {
+          throw new Error("Failed to increment");
+        }
+        const data = (await response.json()) as { count?: number };
+        setVisitCount(typeof data.count === "number" ? data.count : null);
+      } catch (error) {
+        console.error("Failed to increment visitor count", error);
+        try {
+          const fallback = await fetch("/api/visitor");
+          if (!fallback.ok) {
+            throw new Error("Failed to fetch count");
+          }
+          const data = (await fallback.json()) as { count?: number };
+          setVisitCount(typeof data.count === "number" ? data.count : null);
+        } catch (fallbackError) {
+          console.error("Failed to fetch visitor count", fallbackError);
+          setVisitCount(null);
+        }
+      }
+    };
+
+    void syncVisitCount();
+  }, []);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
@@ -200,6 +235,9 @@ export default function Home() {
               >
                 See Upcoming Shows
               </Link>
+            </div>
+            <div className="text-xs font-semibold uppercase tracking-[0.3em] text-white/60 sm:text-sm">
+              Visitors {visitCount !== null ? visitCount.toLocaleString() : "..."}
             </div>
           </div>
           <div className="relative flex items-center justify-center">
