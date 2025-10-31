@@ -15,14 +15,15 @@ async function getRedisClient(): Promise<RedisClient> {
   }
 
   if (!redisClient) {
-    const url = process.env.REDIS_URL.startsWith("redis://")
-      ? process.env.REDIS_URL.replace("redis://", "rediss://")
-      : process.env.REDIS_URL;
+    const url = new URL(process.env.REDIS_URL);
+    const useTls = url.protocol === "rediss:";
     const client = createClient({
-      url,
-      socket: {
-        tls: true,
-      },
+      url: url.toString(),
+      socket: useTls
+        ? {
+            tls: true,
+          }
+        : undefined,
     });
     client.on("error", (error) => {
       console.error("Redis client error", error);
