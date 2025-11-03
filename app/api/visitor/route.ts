@@ -1,45 +1,9 @@
-import { NextResponse } from "next/server";
-import { createClient } from "redis";
+import { NextRequest, NextResponse } from "next/server";
+import { getRedisClient } from "@/lib/redis";
 
 export const runtime = "nodejs";
 
 const VISITOR_KEY = "hibiki:visitor-count";
-
-let redisClient: ReturnType<typeof createClient> | null = null;
-
-async function getRedisClient() {
-  if (!process.env.REDIS_URL) {
-    throw new Error("REDIS_URL environment variable is not configured.");
-  }
-
-  if (redisClient) {
-    return redisClient;
-  }
-
-  const url = new URL(process.env.REDIS_URL);
-  const useTls = url.protocol === "rediss:";
-
-  redisClient = createClient(
-    useTls
-      ? {
-          url: url.toString(),
-          socket: {
-            tls: true,
-          },
-        }
-      : {
-          url: url.toString(),
-        },
-  );
-
-  redisClient.on("error", (error) => {
-    console.error("Redis client error", error);
-  });
-
-  await redisClient.connect();
-
-  return redisClient;
-}
 
 export async function GET() {
   try {
@@ -53,10 +17,37 @@ export async function GET() {
   }
 }
 
-export async function POST() {
+const VISITOR_LOG_KEY = "hibiki:visitor-log";
+const MAX_LOG_LENGTH = 500;
+
+function parseClientIp(request: NextRequest) {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0]?.trim() ?? "unknown";
+  }
+  const realIp = request.headers.get("x-real-ip");
+  if (realIp) return realIp;
+  return request.ip ?? "unknown";
+}
+
+export async function POST(request: NextRequest) {
   try {
     const client = await getRedisClient();
     const count = await client.incr(VISITOR_KEY);
+
+    const logEntry = {
+      timestamp: new Date().toISOString(),
+      ip: parseClientIp(request),
+      country: request.headers.get("x-vercel-ip-country") ?? "unknown",
+      region: request.headers.get("x-vercel-ip-country-region") ?? "unknown",
+      city: request.headers.get("x-vercel-ip-city") ?? "unknown",
+      userAgent: request.headers.get("user-agent") ?? "unknown",
+      referer: request.headers.get("referer") ?? "unknown",
+    };
+
+    await client.lPush(VISITOR_LOG_KEY, JSON.stringify(logEntry));
+    await client.lTrim(VISITOR_LOG_KEY, 0, MAX_LOG_LENGTH - 1);
+
     return NextResponse.json({ count });
   } catch (error) {
     console.error("Failed to update visitor count", error);
