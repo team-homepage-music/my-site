@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { upcomingShows } from "@/lib/content";
 
+// 日付をカード表示用に整形
 function formatShowDate(dateString: string) {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
@@ -23,7 +24,9 @@ type CalendarMonth = {
   weeks: CalendarDay[][];
 };
 
+// 公演リストを基に、カレンダー表示用の月ごとのデータを生成
 function buildCalendarMonths(): CalendarMonth[] {
+  // 日付（YYYY-MM-DD）ごとの公演をまとめる
   const showsByDate = upcomingShows.reduce<Map<string, typeof upcomingShows>>((map, show) => {
     const iso = show.date;
     const list = map.get(iso);
@@ -35,6 +38,7 @@ function buildCalendarMonths(): CalendarMonth[] {
     return map;
   }, new Map());
 
+  // 年月単位で公演情報を束ねる
   const showsByMonth = upcomingShows.reduce<Map<string, typeof upcomingShows>>((map, show) => {
     const date = new Date(`${show.date}T00:00:00Z`);
     const key = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
@@ -57,6 +61,7 @@ function buildCalendarMonths(): CalendarMonth[] {
       const monthIndex = Number(monthStr) - 1;
       const weeks: CalendarDay[][] = [];
 
+      // その月の先頭が週の真ん中でも表示できるよう、前後の日付を埋める
       const firstDay = new Date(Date.UTC(year, monthIndex, 1));
       const startOffset = firstDay.getUTCDay();
       const cursor = new Date(firstDay);
@@ -88,7 +93,9 @@ function buildCalendarMonths(): CalendarMonth[] {
 const weekdayLabels = ["日", "月", "火", "水", "木", "金", "土"];
 
 export default function ShowsPage() {
+  // 公演データからカレンダー用の月データを生成（初回のみ計算）
   const calendarMonths = useMemo(() => buildCalendarMonths(), []);
+  // 現在表示している月のインデックス
   const [activeMonthIndex, setActiveMonthIndex] = useState(0);
   const activeMonth = calendarMonths[activeMonthIndex] ?? null;
 
@@ -113,6 +120,7 @@ export default function ShowsPage() {
           </p>
         </header>
 
+        {/* 公演カード一覧 */}
         <section className="grid gap-6 md:grid-cols-2">
           {upcomingShows.map((show) => (
             <article
@@ -132,6 +140,7 @@ export default function ShowsPage() {
           ))}
         </section>
 
+        {/* 月別カレンダー（矢印で切り替え） */}
         {activeMonth && (
           <section className="space-y-8 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -212,6 +221,7 @@ export default function ShowsPage() {
           </section>
         )}
 
+        {/* ライブ体験の補足説明 */}
         <section className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
           <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-4">
