@@ -11,15 +11,15 @@ export default function MusicPage() {
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-24 pt-36 sm:gap-20 sm:px-10 sm:pb-28 sm:pt-40 lg:gap-24 lg:px-12 lg:pt-44">
         <header className="space-y-6">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-white/70 backdrop-blur-sm">
-            <span>Discography</span>
+            <span>ディスコグラフィー</span>
             <span>Twilight Sessions</span>
           </div>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            Music crafted for twilight listening.
+            黄昏に寄り添うための音楽たち。
           </h1>
           <p className="max-w-3xl text-base leading-relaxed text-white/80">
-            From analog-kissed LPs to intimate livestream sessions, HIBIKI&apos;s catalogue explores noir harmonies,
-            hypnotic grooves, and cinematic textures inspired by after-hours cityscapes.
+            アナログの温度を残すLPから親密なライブ配信まで、HIBIKIのカタログはノワールなハーモニーと催眠的なグルーヴ、
+            深夜の都市風景に着想を得たシネマティックなテクスチャーを旅します。
           </p>
         </header>
 
@@ -47,7 +47,7 @@ export default function MusicPage() {
                 href={release.href}
                 className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
               >
-                Stream Release <span aria-hidden>-&gt;</span>
+                作品を再生 <span aria-hidden>-&gt;</span>
               </Link>
             </article>
           ))}
@@ -56,24 +56,23 @@ export default function MusicPage() {
         <section className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
           <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Behind the Sessions</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">SESSION NOTES</p>
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                Tape-saturated synthscapes, live improvisation, and noir storytelling.
+                テープの飽和、ライブ即興、ノワールな語り。
               </h2>
               <p className="text-sm leading-relaxed text-white/70">
-                Each piece is recorded through analog chains—reel-to-reel tape, spring reverbs, and modular rigs—before
-                being sculpted into immersive headphone experiences.
+                各楽曲はオープンリールやスプリングリバーブ、モジュラー機材を通したアナログチェーンで録音し、
+                その熱量を保ったままヘッドフォン向けの没入体験へ仕立てています。
               </p>
             </div>
             <div className="space-y-4 text-sm leading-relaxed text-white/70">
               <p>
-                Contributors include underground beatmakers from Tokyo and Berlin, string quartets from Kyoto, and
-                spoken word artists from London. Sessions premiere via &quot;Afterlight&quot; with visual collages to
-                match the audio palette.
+                東京とベルリンのアンダーグラウンド・ビートメイカー、京都の弦楽四重奏、ロンドンのスポークンワード・アーティストが参加。
+                音と色彩を響かせるビジュアルコラージュとともに配信「Afterlight」で初披露されます。
               </p>
               <p>
-                Upcoming releases explore dreamlike downtempo, intimate vocal takes, and cinematic pieces designed for
-                indie film scores and gallery installations.
+                これからのリリースでは、夢のようなダウンテンポや親密なボーカルテイク、インディ映画やギャラリー向けに仕立てた
+                シネマティックなピースを展開していきます。
               </p>
             </div>
           </div>

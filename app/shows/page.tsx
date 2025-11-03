@@ -85,7 +85,7 @@ function buildCalendarMonths(): CalendarMonth[] {
     });
 }
 
-const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const weekdayLabels = ["日", "月", "火", "水", "木", "金", "土"];
 
 export default function ShowsPage() {
   const calendarMonths = useMemo(() => buildCalendarMonths(), []);
@@ -104,13 +104,12 @@ export default function ShowsPage() {
       <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-16 px-6 pb-24 pt-36 sm:gap-20 sm:px-10 sm:pb-28 sm:pt-40 lg:gap-24 lg:px-12 lg:pt-44">
         <header className="space-y-6">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-white/70 backdrop-blur-sm">
-            <span>Tour Diary</span>
-            <span>Neon Stages</span>
+            <span>ツアーダイアリー</span>
+            <span>ネオンステージ</span>
           </div>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">Neon-lit stages on the horizon.</h1>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">ネオンが灯る次のステージへ。</h1>
           <p className="max-w-3xl text-base leading-relaxed text-white/80">
-            From intimate Tokyo lounges to coastal festivals in California, each show reimagines HIBIKI&apos;s catalog
-            with live improvisation, guest collaborators, and visual storytelling.
+            東京のラウンジからカリフォルニアの海沿いフェスまで。HIBIKIの楽曲は、ゲストとの即興と映像的な演出で毎夜新しい表情を見せます。
           </p>
         </header>
 
@@ -127,7 +126,7 @@ export default function ShowsPage() {
               <h2 className="mt-4 text-2xl font-semibold text-white">{show.venue}</h2>
               <p className="mt-3 text-sm leading-relaxed text-white/70">{show.note}</p>
               <button className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 transition hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-                Reserve Tickets <span aria-hidden>*</span>
+                チケットを予約 <span aria-hidden>*</span>
               </button>
             </article>
           ))}
@@ -137,12 +136,12 @@ export default function ShowsPage() {
           <section className="space-y-8 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="space-y-2">
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Calendar View</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">カレンダー</p>
                 <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                  Map out the upcoming journey.
+                  カレンダーで旅程を確認する。
                 </h2>
                 <p className="max-w-xl text-sm leading-relaxed text-white/70">
-                  Use the arrows to browse upcoming months. Highlighted dates include venue details and booking notes.
+                  矢印ボタンで月を切り替え、ハイライトされた日付から会場情報とメモをチェックできます。
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -191,7 +190,7 @@ export default function ShowsPage() {
                         <span className="text-sm font-semibold text-white">{day.label}</span>
                         {hasShows && (
                           <span className="rounded-full bg-purple-400/20 px-2 py-0.5 text-[10px] uppercase tracking-[0.3em] text-purple-100">
-                            Show
+                            公演
                           </span>
                         )}
                       </div>
@@ -216,23 +215,20 @@ export default function ShowsPage() {
         <section className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
           <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Experience Notes</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">体験メモ</p>
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                Live looping, improvising sax, and cinematic projections in motion.
+                ライブルーピングと即興サックス、映像演出が交差する夜。
               </h2>
               <p className="text-sm leading-relaxed text-white/70">
-                Every venue is transformed with modular lighting, tactile textiles, and scent design to match each set.
-                Expect spontaneous collaborations and unreleased edits unique to the night.
+                どの会場もモジュラー照明と手触りのある演出で再構築され、その夜だけのコラボレーションと未公開エディットが披露されます。
               </p>
             </div>
             <div className="space-y-4 text-sm leading-relaxed text-white/70">
               <p>
-                Join the post-show &quot;Afterlight&quot; lounges for stripped-back versions, Q&amp;A with the crew, and
-                limited merch drops featuring analog prints and exclusive cassette mixes.
+                公演後の「Afterlight」ラウンジでは、アコースティックな再演やクルーとのQ&amp;A、アナログプリントや限定カセットなどのグッズをお楽しみいただけます。
               </p>
               <p>
-                Looking to host a private or brand-aligned showcase? Reach out through the contact page to craft a
-                bespoke set design and sound palette.
+                プライベートイベントやブランド向けショーをご希望の際は、コンタクトページからご相談ください。会場に合わせたセットデザインとサウンドを共に設計します。
               </p>
             </div>
           </div>

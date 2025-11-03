@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   const expectedPassword = process.env.VISITOR_DASHBOARD_PASSWORD;
 
   if (!expectedPassword || providedPassword !== expectedPassword) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "認証に失敗しました" }, { status: 401 });
   }
 
   try {
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ entries });
   } catch (error) {
-    console.error("Failed to fetch visitor logs", error);
-    return NextResponse.json({ error: "Failed to fetch visitor logs" }, { status: 500 });
+    console.error("来訪ログの取得に失敗しました", error);
+    return NextResponse.json({ error: "来訪ログの取得に失敗しました" }, { status: 500 });
   }
 }

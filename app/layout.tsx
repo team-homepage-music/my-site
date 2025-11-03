@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HIBIKI | Neo-Soul Musician",
+  title: "HIBIKI | ネオソウル・ミュージシャン",
   description:
-    "Official portfolio for HIBIKI: neo-soul vocalist, producer, and live performer crafting twilight soundscapes.",
+    "ネオソウル・ヴォーカリスト／プロデューサー HIBIKI の公式ポートフォリオ。黄昏のサウンドスケープを描くライブと作品を紹介します。",
 };
 
 export default function RootLayout({
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SiteHeader />
         {children}

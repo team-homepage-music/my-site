@@ -20,13 +20,13 @@ export default function VisitorsDashboard() {
   const [error, setError] = useState<string | null>(null);
 
   const columns: Array<{ key: keyof VisitorLogEntry; label: string }> = [
-    { key: "timestamp", label: "Timestamp" },
+    { key: "timestamp", label: "タイムスタンプ" },
     { key: "ip", label: "IP" },
-    { key: "country", label: "Country" },
-    { key: "region", label: "Region" },
-    { key: "city", label: "City" },
-    { key: "referer", label: "Referer" },
-    { key: "userAgent", label: "User Agent" },
+    { key: "country", label: "国" },
+    { key: "region", label: "地域" },
+    { key: "city", label: "都市" },
+    { key: "referer", label: "リファラ" },
+    { key: "userAgent", label: "ユーザーエージェント" },
   ];
 
   const fetchLogs = async (secret: string) => {
@@ -41,7 +41,7 @@ export default function VisitorsDashboard() {
       });
 
       if (!response.ok) {
-        throw new Error(response.status === 401 ? "Invalid password" : "Failed to load logs");
+        throw new Error(response.status === 401 ? "パスワードが正しくありません" : "ログの取得に失敗しました");
       }
 
       const data = (await response.json()) as { entries?: VisitorLogEntry[] };
@@ -50,7 +50,7 @@ export default function VisitorsDashboard() {
     } catch (fetchError) {
       setIsAuthenticated(false);
       setLogs([]);
-      setError(fetchError instanceof Error ? fetchError.message : "Unknown error");
+      setError(fetchError instanceof Error ? fetchError.message : "不明なエラーが発生しました");
     } finally {
       setIsLoading(false);
     }
@@ -98,16 +98,16 @@ export default function VisitorsDashboard() {
     <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-zinc-900 px-6 pb-16 pt-36 text-zinc-100 sm:px-10 sm:pt-40 lg:px-16 lg:pt-44">
       <div className="mx-auto w-full max-w-5xl space-y-10 rounded-3xl border border-white/10 bg-white/5 p-10 shadow-2xl shadow-purple-900/50 backdrop-blur-sm">
         <header className="space-y-2">
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Visitor Insights</h1>
+          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">来訪者ダッシュボード</h1>
           <p className="text-sm text-white/70">
-            Enter the dashboard password to review recent traffic details. Data includes the best-effort origin
-            information collected from request headers.
+            パスワードを入力すると、最新のアクセス状況と推定ロケーション情報を確認できます。
+            ヘッダーから取得した値をもとに可能な限りの詳細を表示します。
           </p>
         </header>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border border-white/10 bg-black/30 p-6">
           <label className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60" htmlFor="dashboard-password">
-            Access Password
+            アクセスパスワード
           </label>
           <input
             id="dashboard-password"
@@ -115,7 +115,7 @@ export default function VisitorsDashboard() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
-            placeholder="Enter password"
+            placeholder="パスワードを入力"
             autoComplete="current-password"
           />
           <div className="flex items-center gap-3">
@@ -124,7 +124,7 @@ export default function VisitorsDashboard() {
               className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:-translate-y-0.5 hover:bg-zinc-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               disabled={isLoading || password.length === 0}
             >
-              {isAuthenticated ? "Unlock Again" : "Unlock Dashboard"}
+              {isAuthenticated ? "再読込" : "ダッシュボードを開く"}
             </button>
             {isAuthenticated && (
               <button
@@ -133,7 +133,7 @@ export default function VisitorsDashboard() {
                 className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 disabled={isLoading}
               >
-                Refresh Logs
+                ログを更新
               </button>
             )}
             {isAuthenticated && (
@@ -143,10 +143,10 @@ export default function VisitorsDashboard() {
                 className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 disabled={logs.length === 0}
               >
-                Export CSV
+                CSVを書き出す
               </button>
             )}
-            {isLoading && <span className="text-xs uppercase tracking-[0.3em] text-white/50">Loading...</span>}
+            {isLoading && <span className="text-xs uppercase tracking-[0.3em] text-white/50">読み込み中...</span>}
           </div>
           {error && <p className="text-sm text-red-400">{error}</p>}
         </form>
@@ -154,36 +154,37 @@ export default function VisitorsDashboard() {
         {isAuthenticated && (
           <section className="space-y-4">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-              <h2 className="text-xl font-semibold text-white">Recent Visitors</h2>
+              <h2 className="text-xl font-semibold text-white">最近のアクセス</h2>
               <p className="text-xs uppercase tracking-[0.3em] text-white/50">
-                Showing {logs.length} entr{logs.length === 1 ? "y" : "ies"}
+                {logs.length}件表示中
               </p>
             </div>
             <div className="overflow-x-auto rounded-2xl border border-white/10 bg-black/40">
               <table className="min-w-full divide-y divide-white/10 text-left text-sm">
                 <thead className="bg-white/5 text-xs uppercase tracking-[0.3em] text-white/60">
                   <tr>
-                    <th className="px-4 py-3">Time (UTC)</th>
+                    <th className="px-4 py-3">日時 (UTC)</th>
                     <th className="px-4 py-3">IP</th>
-                    <th className="px-4 py-3">Country</th>
-                    <th className="px-4 py-3">Region</th>
-                    <th className="px-4 py-3">City</th>
-                    <th className="px-4 py-3">Referrer</th>
-                    <th className="px-4 py-3">User Agent</th>
+                    <th className="px-4 py-3">国</th>
+                    <th className="px-4 py-3">地域</th>
+                    <th className="px-4 py-3">都市</th>
+                    <th className="px-4 py-3">リファラ</th>
+                    <th className="px-4 py-3">ユーザーエージェント</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
                   {logs.map((entry) => (
                     <tr key={`${entry.timestamp}-${entry.ip}`} className="hover:bg-white/5">
                       <td className="px-4 py-3 font-mono text-xs text-white/80">
-                        {new Date(entry.timestamp).toLocaleString("en-US", {
+                        {new Date(entry.timestamp).toLocaleString("ja-JP", {
                           timeZone: "UTC",
+                          hour12: false,
                         })}
                       </td>
                       <td className="px-4 py-3 font-mono text-xs text-white/80">{entry.ip}</td>
-                      <td className="px-4 py-3 text-xs text-white/80">{entry.country ?? "unknown"}</td>
-                      <td className="px-4 py-3 text-xs text-white/80">{entry.region ?? "unknown"}</td>
-                      <td className="px-4 py-3 text-xs text-white/80">{entry.city ?? "unknown"}</td>
+                      <td className="px-4 py-3 text-xs text-white/80">{entry.country ?? "不明"}</td>
+                      <td className="px-4 py-3 text-xs text-white/80">{entry.region ?? "不明"}</td>
+                      <td className="px-4 py-3 text-xs text-white/80">{entry.city ?? "不明"}</td>
                       <td className="px-4 py-3 text-xs text-white/80">
                         {entry.referer && entry.referer !== "unknown" ? (
                           <a
@@ -195,18 +196,18 @@ export default function VisitorsDashboard() {
                             {entry.referer}
                           </a>
                         ) : (
-                          "unknown"
+                          "不明"
                         )}
                       </td>
                       <td className="px-4 py-3 text-xs text-white/70">
-                        {entry.userAgent && entry.userAgent !== "unknown" ? entry.userAgent : "unknown"}
+                        {entry.userAgent && entry.userAgent !== "unknown" ? entry.userAgent : "不明"}
                       </td>
                     </tr>
                   ))}
                   {logs.length === 0 && (
                     <tr>
                       <td colSpan={7} className="px-4 py-10 text-center text-sm text-white/60">
-                        No visitor data recorded yet.
+                        来訪ログはまだありません。
                       </td>
                     </tr>
                   )}

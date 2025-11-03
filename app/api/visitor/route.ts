@@ -12,8 +12,8 @@ export async function GET() {
     const count = value ? Number.parseInt(value, 10) || 0 : 0;
     return NextResponse.json({ count });
   } catch (error) {
-    console.error("Failed to read visitor count", error);
-    return NextResponse.json({ error: "Failed to fetch visitor count" }, { status: 500 });
+    console.error("来訪者数の取得に失敗しました", error);
+    return NextResponse.json({ error: "来訪者数の取得に失敗しました" }, { status: 500 });
   }
 }
 
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ count });
   } catch (error) {
-    console.error("Failed to update visitor count", error);
-    return NextResponse.json({ error: "Failed to update visitor count" }, { status: 500 });
+    console.error("来訪者数の更新に失敗しました", error);
+    return NextResponse.json({ error: "来訪者数の更新に失敗しました" }, { status: 500 });
   }
 }

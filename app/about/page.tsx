@@ -11,20 +11,19 @@ export default function AboutPage() {
       <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-16 px-6 pb-20 pt-36 sm:px-10 sm:pb-24 sm:pt-40 lg:px-12 lg:pt-44">
         <header className="space-y-6">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-white/70 backdrop-blur-sm">
-            <span>Artist Profile</span>
+            <span>アーティストプロフィール</span>
             <span>Studio Nightfall</span>
           </div>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            Sonic postcards from night cities and neon rain.
+            夜の街とネオンの雨が描くサウンドポストカード。
           </h1>
           <p className="max-w-3xl text-base leading-relaxed text-white/80">
-            Raised between Kyoto&apos;s jazz kissaten bars and London&apos;s warehouse venues, HIBIKI crafts intimate
-            narratives that oscillate between confessional ballads and meditative grooves. Her latest work dives into
-            modular synth improvisation paired with human stories scouted from midnight trains.
+            京都のジャズ喫茶とロンドンの倉庫街、その二つの都市を行き来して育ったHIBIKIは、告白的なバラードと瞑想的なグルーヴを行き来する物語を紡ぎ続けています。
+            最新作ではモジュラーシンセの即興と、深夜の列車で拾い集めた人々のストーリーを重ね合わせています。
           </p>
           <p className="max-w-3xl text-base leading-relaxed text-white/70">
-            Offstage, she hosts &quot;Afterlight&quot;: a monthly livestream illuminating emerging artists across Asia.
-            Expect candle-lit visuals, tactile textures, and melodies that linger like half-remembered dreams.
+            ステージを降りると、アジア各地の新鋭アーティストを照らす月例配信「Afterlight」を主宰。
+            キャンドルとテクスチャーを生かした映像、美しい余韻を残すメロディで、夢の断片のような時間を届けています。
           </p>
         </header>
 
@@ -34,7 +33,7 @@ export default function AboutPage() {
               key={feature.label}
               className="rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/30 backdrop-blur-sm transition hover:-translate-y-1 hover:border-white/40"
             >
-              <span className="text-xs uppercase tracking-[0.3em] text-white/60">Highlight</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-white/60">ハイライト</span>
               <h2 className="mt-3 text-2xl font-semibold text-white">{feature.label}</h2>
               <p className="mt-4 text-sm leading-relaxed text-white/70">{feature.description}</p>
             </article>
@@ -44,24 +43,23 @@ export default function AboutPage() {
         <section className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
           <div className="grid gap-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Creative Pillars</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">CREATIVE PILLARS</p>
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                Live looping, modular synths, and documentary storytelling.
+                ライブルーピングとモジュラーシンセ、ドキュメンタリー的語り口。
               </h2>
               <p className="text-sm leading-relaxed text-white/70">
-                Each project is rooted in field recordings gathered across the Pacific, collaborating with filmmakers,
-                poets, and movement artists to shape immersive performances.
+                作品の土台には、太平洋を巡りながら収集したフィールドレコーディングがあります。
+                映像作家や詩人、ダンサーとのコラボレーションを重ね、没入感のあるパフォーマンスを形作っています。
               </p>
             </div>
             <div className="space-y-4 text-sm leading-relaxed text-white/70">
               <p>
-                Current residency at Midnight Sun Studios explores tactile lighting and analog tape saturation,
-                capturing sessions directly onto reel-to-reel before sculpting digital mixes designed for nocturnal
-                listening rooms.
+                現在行っているMidnight Sun Studiosでのレジデンシーでは、手触りのある照明とアナログテープの飽和感を探求。
+                セッションはすべてオープンリールに録音し、夜のリスニングルームにふさわしいデジタルミックスへと磨き上げています。
               </p>
               <p>
-                HIBIKI&apos;s creative circle includes improvising saxophonists, modular synth architects, and spoken
-                word artists. Together they design bespoke shows for galleries, pop-up clubs, and cinematic livestreams.
+                周囲には即興サックス奏者やモジュラーシンセのエンジニア、スポークンワードの詩人が集い、
+                ギャラリーやポップアップクラブ、映画的なライブ配信のためのオーダーメイドなショーを共に設計しています。
               </p>
             </div>
           </div>
@@ -72,13 +70,13 @@ export default function AboutPage() {
             href="/music"
             className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:-translate-y-0.5 hover:bg-zinc-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            Explore Discography
+            ディスコグラフィーを見る
           </Link>
           <Link
             href="/shows"
             className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            Upcoming Shows
+            公演スケジュールへ
           </Link>
         </div>
       </main>

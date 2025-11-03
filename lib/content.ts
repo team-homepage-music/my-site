@@ -13,8 +13,8 @@ export const releases: Release[] = [
     type: "LP",
     year: "2023",
     description:
-      "A smoky blend of neo-soul and electronica, crafted in collaboration with underground beatmakers from Tokyo and Berlin.",
-    highlights: ["#3 on Indie Soul Charts", "BBC Radio 1 Feature"],
+      "東京とベルリンのアンダーグラウンド・ビートメイカーと共作した、ネオソウルとエレクトロニカが煙るように溶け合うアルバム。",
+    highlights: ["Indie Soulチャートで3位", "BBC Radio 1で特集"],
     href: "#",
   },
   {
@@ -22,8 +22,8 @@ export const releases: Release[] = [
     type: "EP",
     year: "2022",
     description:
-      "Five-track exploration of intimate ballads with lush string arrangements and analog synth textures.",
-    highlights: ["1M+ Streams", "Featured on Spotify's Fresh Finds"],
+      "アナログシンセの質感と豊かなストリングスが包み込む、親密なバラードを収めた全5曲のEP。",
+    highlights: ["ストリーミング累計100万回超", "Spotify『Fresh Finds』掲載"],
     href: "#",
   },
   {
@@ -31,8 +31,8 @@ export const releases: Release[] = [
     type: "Single",
     year: "2024",
     description:
-      "Warm lo-fi groove capturing the after-hours glow of Shibuya with live saxophone improvisation.",
-    highlights: ["NPR Tiny Desk Contest Finalist"],
+      "渋谷の深夜の光をすくい取るウォームなローファイ・グルーヴ。ライブ録音のサックス即興をフィーチャー。",
+    highlights: ["NPR Tiny Desk Contest ファイナリスト"],
     href: "#",
   },
 ];
@@ -49,25 +49,25 @@ export const upcomingShows: Show[] = [
     date: "2024-07-18",
     city: "Tokyo, JP",
     venue: "Velvet Lounge",
-    note: "Sold Out - Late Show",
+    note: "完売（レイトショー）",
   },
   {
     date: "2024-08-02",
     city: "Osaka, JP",
     venue: "Blue Canvas Club",
-    note: "With special guest DJ Nightshade",
+    note: "スペシャルゲストDJ Nightshade出演",
   },
   {
     date: "2024-09-14",
     city: "Seoul, KR",
     venue: "Aurora Hall",
-    note: "Tickets available now",
+    note: "チケット発売中",
   },
   {
     date: "2024-10-05",
     city: "Los Angeles, US",
     venue: "Echo Park Sessions",
-    note: "Part of Golden Hour Festival",
+    note: "Golden Hour Festival内公演",
   },
 ];
 
@@ -79,15 +79,15 @@ export type Feature = {
 export const features: Feature[] = [
   {
     label: "Tiny Desk Finalist",
-    description: "One of ten artists featured in NPR's 2024 Tiny Desk Contest finale showcase.",
+    description: "NPR 2024 Tiny Desk Contestのファイナル・ショーケースに選出された10組のひとり。",
   },
   {
     label: "Residency",
-    description: "Three-month residency at Midnight Sun Studios exploring modular synth improvisation.",
+    description: "Midnight Sun Studiosで3か月のレジデンシーを行い、モジュラーシンセの即興を追究。",
   },
   {
     label: "Composer",
-    description: 'Scored the indie short film "Streets of Paper" premiering at Raindance 2023.',
+    description: '短編映画「Streets of Paper」（Raindance 2023公開）で音楽を担当。',
   },
 ];
 
@@ -99,7 +99,7 @@ export type ContactLink = {
 
 export const contactLinks: ContactLink[] = [
   { label: "Instagram", handle: "@hibiki.sound", href: "#" },
-  { label: "Spotify", handle: "Listen on Spotify", href: "#" },
-  { label: "YouTube", handle: "Live Sessions", href: "#" },
+  { label: "Spotify", handle: "Spotifyで聴く", href: "#" },
+  { label: "YouTube", handle: "ライブセッション", href: "#" },
   { label: "Management", handle: "booking@hibikimusic.com", href: "mailto:booking@hibikimusic.com" },
 ];

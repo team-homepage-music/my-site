@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Music", href: "/music" },
-  { label: "Shows", href: "/shows" },
-  { label: "Connect", href: "/connect" },
+  { label: "ホーム", href: "/" },
+  { label: "アバウト", href: "/about" },
+  { label: "ミュージック", href: "/music" },
+  { label: "ショー", href: "/shows" },
+  { label: "コンタクト", href: "/connect" },
 ];
 
 export function SiteHeader() {
@@ -37,7 +37,7 @@ export function SiteHeader() {
             aria-controls="mobile-nav"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white transition hover:border-white/50 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:hidden"
           >
-            <span className="sr-only">Toggle navigation</span>
+            <span className="sr-only">ナビゲーションを開閉</span>
             <span
               className={`block h-0.5 w-7 bg-white transition-transform duration-300 ${isMenuOpen ? "translate-y-2 rotate-45" : ""}`}
             />

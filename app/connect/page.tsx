@@ -11,19 +11,19 @@ export default function ConnectPage() {
         <header className="space-y-6">
           <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.3em] text-white/70 backdrop-blur-sm">
             <span>Studio Nightfall</span>
-            <span>Collaborations</span>
+            <span>コラボレーション</span>
           </div>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            Collaborations, studio bookings, and private showcases.
+            コラボレーション、スタジオ予約、プライベートショウケースに関するご案内。
           </h1>
           <p className="max-w-3xl text-base leading-relaxed text-white/80">
-            Whether you&apos;re curating a gallery experience, seeking cinematic scoring, or planning intimate brand
-            events, HIBIKI&apos;s team can tailor performances, livestream concepts, and installation-ready soundscapes.
+            ギャラリー体験の企画やシネマティックなスコア制作、ブランドの親密なイベントまで。
+            HIBIKIのチームがパフォーマンス、配信演出、インスタレーション向けサウンドをオーダーメイドでお届けします。
           </p>
         </header>
 
         <section className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
-          <h2 className="text-xl font-semibold text-white">Direct Channels</h2>
+          <h2 className="text-xl font-semibold text-white">ダイレクトチャネル</h2>
           <ul className="space-y-4">
             {contactLinks.map((link) => (
               <li
@@ -41,19 +41,19 @@ export default function ConnectPage() {
 
         <section className="grid gap-6 md:grid-cols-2">
           <article className="rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur-sm">
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60">Livestreams</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60">ライブ配信</p>
             <h3 className="mt-3 text-2xl font-semibold text-white">Afterlight Sessions</h3>
             <p className="mt-4 text-sm leading-relaxed text-white/70">
-              Monthly broadcasts featuring emerging artists throughout Asia. Custom segments available for cultural or
-              brand collaborations, filmed in studio with cinematic lighting and tactile set design.
+              アジア各地の新鋭アーティストを届ける月例配信。
+              文化的・ブランド向けのカスタムコーナーも制作可能で、シネマティックな照明と質感豊かなセットで収録します。
             </p>
           </article>
           <article className="rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur-sm">
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60">Private Events</p>
-            <h3 className="mt-3 text-2xl font-semibold text-white">Candlelit Installations</h3>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60">プライベートイベント</p>
+            <h3 className="mt-3 text-2xl font-semibold text-white">キャンドルナイト・インスタレーション</h3>
             <p className="mt-4 text-sm leading-relaxed text-white/70">
-              Bespoke performances for galleries, rooftops, and creative retreats. Includes on-site sound design, visual
-              direction, and optional modular synth improvisations tailored to the space.
+              ギャラリーやルーフトップ、クリエイティブリトリートのためのカスタムパフォーマンス。
+              現地の音響演出やビジュアルディレクション、空間に合わせたモジュラーシンセの即興まで対応します。
             </p>
           </article>
         </section>
@@ -61,13 +61,12 @@ export default function ConnectPage() {
         <section className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
           <div className="space-y-4 text-sm leading-relaxed text-white/70">
             <p>
-              Please provide project scope, desired dates, location, and any technical requirements when reaching out.
-              Remote scoring and collaborative production are available via the analog-equipped Studio Nightfall in
-              Tokyo.
+              お問い合わせの際は、企画内容・希望日程・場所・必要な技術条件をお知らせください。
+              東京のStudio Nightfallではアナログ機材を備えたリモートスコアリングや共同制作も承っています。
             </p>
             <p>
-              For media inquiries, download press assets and high-resolution imagery after connecting with the management
-              team. Response times are typically within three business days.
+              メディア関係の方は、マネジメントチームと連絡後にプレス素材・高解像度写真をダウンロードいただけます。
+              通常1〜3営業日以内にご返信いたします。
             </p>
           </div>
         </section>
