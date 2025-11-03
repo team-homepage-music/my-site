@@ -95,7 +95,7 @@ export default function VisitorsDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-zinc-900 px-6 py-16 text-zinc-100 sm:px-10 lg:px-16">
+    <div className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-zinc-900 px-6 pb-16 pt-36 text-zinc-100 sm:px-10 sm:pt-40 lg:px-16 lg:pt-44">
       <div className="mx-auto w-full max-w-5xl space-y-10 rounded-3xl border border-white/10 bg-white/5 p-10 shadow-2xl shadow-purple-900/50 backdrop-blur-sm">
         <header className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Visitor Insights</h1>

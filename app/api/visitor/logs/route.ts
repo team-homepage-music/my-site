@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
       .map((entry) => {
         try {
           return JSON.parse(entry) as VisitorLogEntry;
-        } catch (_error) {
+        } catch {
           return null;
         }
       })

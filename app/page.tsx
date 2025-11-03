@@ -2,92 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-
-const releases = [
-  {
-    title: "Midnight Reverie",
-    type: "LP",
-    year: "2023",
-    description:
-      "A smoky blend of neo-soul and electronica, crafted in collaboration with underground beatmakers from Tokyo and Berlin.",
-    highlights: ["#3 on Indie Soul Charts", "BBC Radio 1 Feature"],
-    href: "#",
-  },
-  {
-    title: "Paper Lanterns",
-    type: "EP",
-    year: "2022",
-    description:
-      "Five-track exploration of intimate ballads with lush string arrangements and analog synth textures.",
-    highlights: ["1M+ Streams", "Featured on Spotify's Fresh Finds"],
-    href: "#",
-  },
-  {
-    title: "City Sketches",
-    type: "Single",
-    year: "2024",
-    description:
-      "Warm lo-fi groove capturing the after-hours glow of Shibuya with live saxophone improvisation.",
-    highlights: ["NPR Tiny Desk Contest Finalist"],
-    href: "#",
-  },
-];
-
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Music", href: "#music" },
-  { label: "Shows", href: "#shows" },
-  { label: "Connect", href: "#connect" },
-];
-
-const upcomingShows = [
-  {
-    date: "2024-07-18",
-    city: "Tokyo, JP",
-    venue: "Velvet Lounge",
-    note: "Sold Out - Late Show",
-  },
-  {
-    date: "2024-08-02",
-    city: "Osaka, JP",
-    venue: "Blue Canvas Club",
-    note: "With special guest DJ Nightshade",
-  },
-  {
-    date: "2024-09-14",
-    city: "Seoul, KR",
-    venue: "Aurora Hall",
-    note: "Tickets available now",
-  },
-  {
-    date: "2024-10-05",
-    city: "Los Angeles, US",
-    venue: "Echo Park Sessions",
-    note: "Part of Golden Hour Festival",
-  },
-];
-
-const features = [
-  {
-    label: "Tiny Desk Finalist",
-    description: "One of ten artists featured in NPR's 2024 Tiny Desk Contest finale showcase.",
-  },
-  {
-    label: "Residency",
-    description: "Three-month residency at Midnight Sun Studios exploring modular synth improvisation.",
-  },
-  {
-    label: "Composer",
-    description: 'Scored the indie short film "Streets of Paper" premiering at Raindance 2023.',
-  },
-];
-
-const contactLinks = [
-  { label: "Instagram", handle: "@hibiki.sound", href: "#" },
-  { label: "Spotify", handle: "Listen on Spotify", href: "#" },
-  { label: "YouTube", handle: "Live Sessions", href: "#" },
-  { label: "Management", handle: "booking@hibikimusic.com", href: "mailto:booking@hibikimusic.com" },
-];
+import { contactLinks, features, releases, upcomingShows } from "@/lib/content";
 
 function formatShowDate(dateString: string) {
   return new Intl.DateTimeFormat("en-US", {
@@ -97,12 +12,8 @@ function formatShowDate(dateString: string) {
 }
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [visitCount, setVisitCount] = useState<number | null>(null);
   const hasIncremented = useRef(false);
-
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const closeMenu = () => setIsMenuOpen(false);
 
   useEffect(() => {
     if (hasIncremented.current) {
@@ -137,75 +48,45 @@ export default function Home() {
     void syncVisitCount();
   }, []);
 
+  const quickLinks = [
+    {
+      label: "About",
+      description: "Discover HIBIKI's story, influences, and creative approach.",
+      href: "/about",
+    },
+    {
+      label: "Music",
+      description: "Listen to the latest releases sculpted for twilight hours.",
+      href: "/music",
+    },
+    {
+      label: "Shows",
+      description: "Track upcoming tour dates and reserve intimate tickets.",
+      href: "/shows",
+    },
+    {
+      label: "Connect",
+      description: "Collaborations, management, and livestream appearances.",
+      href: "/connect",
+    },
+  ];
+
+  const spotlightRelease = releases[0];
+  const highlightShow = upcomingShows[0];
+  const highlightFeature = features[0];
+  const primaryContact = contactLinks[0];
+  const contactLinkProps =
+    primaryContact.href.startsWith("http") || primaryContact.href.startsWith("//")
+      ? { target: "_blank", rel: "noreferrer" }
+      : {};
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-purple-600/60 via-fuchsia-500/40 to-amber-500/40 blur-3xl will-change-transform"
         aria-hidden
       />
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-30">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 pb-4 pt-6 sm:px-10 lg:px-12">
-          <button
-            type="button"
-            onClick={toggleMenu}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-nav"
-            className="pointer-events-auto inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/30 bg-white/10 p-2 text-white transition hover:border-white/50 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            <span className="sr-only">Toggle navigation</span>
-            <span
-              className={`block h-0.5 w-7 bg-white transition-transform duration-300 ${isMenuOpen ? "translate-y-2 rotate-45" : ""}`}
-            />
-            <span
-              className={`mt-1 block h-0.5 w-7 bg-white transition-opacity duration-300 ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
-            />
-            <span
-              className={`mt-1 block h-0.5 w-7 bg-white transition-transform duration-300 ${isMenuOpen ? "-translate-y-2 -rotate-45" : ""}`}
-            />
-          </button>
-          <nav className="pointer-events-auto hidden items-center gap-6 text-sm font-semibold text-white/80 lg:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-full border border-transparent px-4 py-2 transition hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </header>
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 z-20 bg-black/70 backdrop-blur-sm lg:hidden"
-          role="dialog"
-          aria-modal="true"
-          onClick={closeMenu}
-        >
-          <nav
-            id="mobile-nav"
-            className="absolute left-6 right-6 top-24 rounded-3xl border border-white/20 bg-zinc-950/95 p-6 shadow-2xl shadow-black/60"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <ul className="space-y-3 text-lg font-semibold text-white/90">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={closeMenu}
-                    className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/5 px-5 py-3 transition hover:border-white/40 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <span>{link.label}</span>
-                    <span className="text-sm text-white/60">-&gt;</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      )}
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 px-6 pb-20 pt-32 sm:gap-20 sm:px-10 sm:pb-24 sm:pt-36 lg:gap-28 lg:px-12 lg:pt-40">
+      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 pb-24 pt-40 sm:gap-24 sm:px-10 sm:pb-28 sm:pt-44 lg:gap-28 lg:px-12 lg:pt-48">
         <section className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div className="space-y-8">
             <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs uppercase tracking-[0.25em] text-white/80 backdrop-blur-sm sm:text-sm">
@@ -220,17 +101,17 @@ export default function Home() {
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-white/80">
               HIBIKI blends jazz harmonies, late-night electronica, and noir film soundscapes into immersive live sets.
-              Each performance is shaped by live looping, improvised saxophone cameos, and minimalist lighting.
+              Each performance is sculpted through live looping, analog warmth, and minimalist lighting installations.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="#music"
+                href="/music"
                 className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-900 shadow-lg shadow-purple-600/30 transition hover:-translate-y-0.5 hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Listen to the Latest
               </Link>
               <Link
-                href="#shows"
+                href="/shows"
                 className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 See Upcoming Shows
@@ -262,126 +143,108 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="grid gap-12 md:grid-cols-2">
-          <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">About</p>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Sonic postcards from night cities and neon rain.
-            </h2>
-            <p className="text-base leading-relaxed text-white/80">
-              Raised between Kyoto's jazz kissaten bars and London's warehouse venues, HIBIKI crafts intimate narratives
-              that oscillate between confessional ballads and meditative grooves. Her latest work dives into modular
-              synth improvisation paired with human stories scouted from midnight trains.
+        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {quickLinks.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group flex flex-col justify-between rounded-3xl border border-white/15 bg-white/5 p-6 text-left shadow-lg shadow-purple-900/30 backdrop-blur-sm transition hover:-translate-y-1 hover:border-white/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              <div className="space-y-3">
+                <span className="text-xs uppercase tracking-[0.3em] text-white/60">Explore</span>
+                <h2 className="text-2xl font-semibold text-white group-hover:text-white/90">{item.label}</h2>
+                <p className="text-sm leading-relaxed text-white/70">{item.description}</p>
+              </div>
+              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/80">
+                Enter <span aria-hidden>-&gt;</span>
+              </span>
+            </Link>
+          ))}
+        </section>
+
+        <section className="grid gap-6 lg:grid-cols-2">
+          <article className="rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur-sm">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60">Spotlight Release</p>
+            <h3 className="mt-3 text-2xl font-semibold text-white">{spotlightRelease.title}</h3>
+            <p className="mt-2 text-sm text-white/60">
+              {spotlightRelease.type} · {spotlightRelease.year}
             </p>
-            <p className="text-base leading-relaxed text-white/70">
-              When not on tour, she hosts "Afterlight": a monthly livestream showcasing emerging artists across Asia.
-              Expect candle-lit stages, tactile textures, and melodies that linger like half-remembered dreams.
-            </p>
-          </div>
-          <div className="space-y-6 rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-800/30 backdrop-blur-sm">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Highlights</p>
-            <ul className="space-y-6">
-              {features.map((feature) => (
-                <li key={feature.label} className="space-y-2">
-                  <div className="text-lg font-semibold text-white">{feature.label}</div>
-                  <p className="text-sm leading-relaxed text-white/70">{feature.description}</p>
+            <p className="mt-4 text-sm leading-relaxed text-white/70">{spotlightRelease.description}</p>
+            <ul className="mt-6 space-y-2 text-xs uppercase tracking-[0.3em] text-white/50">
+              {spotlightRelease.highlights.map((highlight) => (
+                <li key={highlight} className="flex items-center gap-3">
+                  <span className="h-px w-8 bg-white/40" aria-hidden />
+                  <span>{highlight}</span>
                 </li>
               ))}
             </ul>
-          </div>
+            <Link
+              href="/music"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
+            >
+              View Discography <span aria-hidden>-&gt;</span>
+            </Link>
+          </article>
+
+          <article className="rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur-sm">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60">Next Appearance</p>
+            <h3 className="mt-3 text-2xl font-semibold text-white">{highlightShow.venue}</h3>
+            <p className="mt-2 text-sm text-white/60">
+              {formatShowDate(highlightShow.date)} · {highlightShow.city}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-white/70">{highlightShow.note}</p>
+            <Link
+              href="/shows"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
+            >
+              View Tour Schedule <span aria-hidden>-&gt;</span>
+            </Link>
+          </article>
+
+          <article className="rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur-sm lg:col-span-2">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60">Recent Highlight</p>
+            <h3 className="mt-3 text-2xl font-semibold text-white">{highlightFeature.label}</h3>
+            <p className="mt-4 text-sm leading-relaxed text-white/70">{highlightFeature.description}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-xs uppercase tracking-[0.3em] text-white/70">
+              <span>Livestreams</span>
+              <span>Residencies</span>
+              <span>Scores</span>
+              <span>Collaborations</span>
+            </div>
+          </article>
         </section>
 
-        <section id="music" className="space-y-10">
-          <div className="space-y-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Latest Releases</p>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Music crafted for twilight listening.
-            </h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {releases.map((release) => (
-              <article
-                key={release.title}
-                className="group rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur-sm transition hover:-translate-y-1 hover:border-white/40"
-              >
-                <div className="mb-5 flex items-center justify-between text-sm uppercase tracking-[0.3em] text-white/60">
-                  <span>{release.type}</span>
-                  <span>{release.year}</span>
-                </div>
-                <h3 className="text-2xl font-semibold text-white group-hover:text-white/90">{release.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-white/70">{release.description}</p>
-                <ul className="mt-6 space-y-2 text-xs uppercase tracking-[0.3em] text-white/50">
-                  {release.highlights.map((highlight) => (
-                    <li key={highlight} className="flex items-center gap-3">
-                      <span className="h-px w-8 bg-white/40" aria-hidden />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={release.href}
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
-                >
-                  Stream Release <span aria-hidden>-&gt;</span>
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="shows" className="space-y-10">
-          <div className="space-y-4">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Upcoming Schedule</p>
-            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Neon-lit stages on the horizon.
-            </h2>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {upcomingShows.map((show) => (
-              <article
-                key={`${show.date}-${show.venue}`}
-                className="rounded-3xl border border-white/15 bg-gradient-to-br from-white/8 to-white/3 p-6 shadow-lg shadow-black/40 backdrop-blur-sm transition hover:-translate-y-1 hover:border-white/35"
-              >
-                <div className="flex items-baseline justify-between text-xs uppercase tracking-[0.3em] text-white/60">
-                  <span>{formatShowDate(show.date)}</span>
-                  <span>{show.city}</span>
-                </div>
-                <h3 className="mt-4 text-2xl font-semibold text-white">{show.venue}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/70">{show.note}</p>
-                <button className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/80 transition hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-                  Reserve Tickets <span aria-hidden>*</span>
-                </button>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section
-          id="connect"
-          className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12"
-        >
+        <section className="rounded-3xl border border-white/15 bg-white/5 p-8 shadow-xl shadow-purple-900/40 backdrop-blur-sm md:p-12">
           <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
             <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Connect</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">Stay Connected</p>
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                Collaborations, studio bookings, and private showcases.
+                Join the circle for premieres, livestreams, and secret sets.
               </h2>
               <p className="text-sm leading-relaxed text-white/70">
-                For bespoke performances, cinematic scoring, or cross-genre collaborations, reach out with project
-                details and timelines. Remote sessions available via analog-equipped studio in Tokyo.
+                Get early access to cinematic releases, private showcases, and cross-genre collaborations. Management
+                and booking inquiries are handled directly through the studio team.
               </p>
             </div>
-            <ul className="space-y-4">
-              {contactLinks.map((link) => (
-                <li
-                  key={link.label}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-full border border-white/15 bg-white/10 px-6 py-4 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white"
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-white/20 bg-white/10 p-6">
+                <p className="text-xs uppercase tracking-[0.3em] text-white/60">Featured Channel</p>
+                <div className="mt-3 text-lg font-semibold text-white">{primaryContact.label}</div>
+                <a
+                  href={primaryContact.href}
+                  {...contactLinkProps}
+                  className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition hover:text-white"
                 >
-                  <span>{link.label}</span>
-                  <Link href={link.href}>{link.handle}</Link>
-                </li>
-              ))}
-            </ul>
+                  {primaryContact.handle} <span aria-hidden>-&gt;</span>
+                </a>
+              </div>
+              <Link
+                href="/connect"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Explore Contact Options
+              </Link>
+            </div>
           </div>
         </section>
       </main>
