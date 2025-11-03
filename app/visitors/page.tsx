@@ -115,7 +115,7 @@ export default function VisitorsDashboard() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-white focus:border-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
-            placeholder="Enter password"
+            placeholder="Enter password (configured via VISITOR_DASHBOARD_PASSWORD)"
             autoComplete="current-password"
           />
           <div className="flex items-center gap-3">

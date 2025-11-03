@@ -4,7 +4,6 @@ import { getRedisClient } from "@/lib/redis";
 export const runtime = "nodejs";
 
 const VISITOR_LOG_KEY = "hibiki:visitor-log";
-const DEFAULT_PASSWORD = "HIBIKI";
 const MAX_RETURNED_LOGS = 200;
 
 type VisitorLogEntry = {
@@ -20,9 +19,9 @@ type VisitorLogEntry = {
 export async function GET(request: NextRequest) {
   const providedPassword =
     request.headers.get("x-dashboard-key") ?? request.nextUrl.searchParams.get("password") ?? "";
-  const expectedPassword = process.env.VISITOR_DASHBOARD_PASSWORD ?? DEFAULT_PASSWORD;
+  const expectedPassword = process.env.VISITOR_DASHBOARD_PASSWORD;
 
-  if (providedPassword !== expectedPassword) {
+  if (!expectedPassword || providedPassword !== expectedPassword) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
