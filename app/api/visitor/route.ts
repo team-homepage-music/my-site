@@ -27,7 +27,7 @@ function parseClientIp(request: NextRequest) {
   }
   const realIp = request.headers.get("x-real-ip");
   if (realIp) return realIp;
-  return request.ip ?? "unknown";
+  return request.headers.get("cf-connecting-ip") ?? request.headers.get("x-client-ip") ?? "unknown";
 }
 
 export async function POST(request: NextRequest) {
