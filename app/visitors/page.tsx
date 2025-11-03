@@ -19,6 +19,16 @@ export default function VisitorsDashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const columns: Array<{ key: keyof VisitorLogEntry; label: string }> = [
+    { key: "timestamp", label: "Timestamp" },
+    { key: "ip", label: "IP" },
+    { key: "country", label: "Country" },
+    { key: "region", label: "Region" },
+    { key: "city", label: "City" },
+    { key: "referer", label: "Referer" },
+    { key: "userAgent", label: "User Agent" },
+  ];
+
   const fetchLogs = async (secret: string) => {
     setIsLoading(true);
     setError(null);
@@ -53,6 +63,35 @@ export default function VisitorsDashboard() {
 
   const handleRefresh = () => {
     void fetchLogs(password);
+  };
+
+  const handleExport = () => {
+    if (logs.length === 0) {
+      return;
+    }
+
+    const header = columns.map((column) => column.label).join(",");
+    const rows = logs.map((entry) =>
+      columns
+        .map((column) => {
+          const value = entry[column.key] ?? "";
+          const asString = typeof value === "string" ? value : "";
+          const escaped = asString.replace(/"/g, '""');
+          return `"${escaped}"`;
+        })
+        .join(","),
+    );
+
+    const csvContent = [header, ...rows].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `visitor-logs-${Date.now()}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -95,6 +134,16 @@ export default function VisitorsDashboard() {
                 disabled={isLoading}
               >
                 Refresh Logs
+              </button>
+            )}
+            {isAuthenticated && (
+              <button
+                type="button"
+                onClick={handleExport}
+                className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                disabled={logs.length === 0}
+              >
+                Export CSV
               </button>
             )}
             {isLoading && <span className="text-xs uppercase tracking-[0.3em] text-white/50">Loading...</span>}
