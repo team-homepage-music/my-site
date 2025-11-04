@@ -41,6 +41,8 @@ export function StarField() {
     return Array.from({ length: STAR_COUNT }, (_, index) => createStar(index));
   }, []);
 
+  const format = (value: number) => value.toFixed(4);
+
   return (
     <div className="star-field" aria-hidden="true">
       {stars.map((star, index) => (
@@ -48,12 +50,12 @@ export function StarField() {
           key={`star-${index}`}
           className="star-field__star"
           style={{
-            "--star-top": `${star.top}%`,
-            "--star-left": `${star.left}%`,
-            "--star-size": `${star.size}px`,
-            "--star-duration": `${star.duration}s`,
-            "--star-delay": `${star.delay}s`,
-            "--star-opacity": star.opacity.toString(),
+            "--star-top": `${format(star.top)}%`,
+            "--star-left": `${format(star.left)}%`,
+            "--star-size": `${format(star.size)}px`,
+            "--star-duration": `${format(star.duration)}s`,
+            "--star-delay": `${format(star.delay)}s`,
+            "--star-opacity": format(star.opacity),
           } as CSSProperties}
         />
       ))}
