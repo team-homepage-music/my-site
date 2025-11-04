@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BgmPlayer } from "@/components/bgm-player";
-import { FlameBackground } from "@/components/flame-background";
 import { SiteHeader } from "@/components/site-header";
 
 const geistSans = Geist({
@@ -29,12 +28,9 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <FlameBackground />
-        <div className="relative z-10 flex min-h-screen flex-col">
-          <SiteHeader />
-          {children}
-          <BgmPlayer />
-        </div>
+        <SiteHeader />
+        {children}
+        <BgmPlayer />
       </body>
     </html>
   );

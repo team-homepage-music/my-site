@@ -81,7 +81,7 @@ export default function Home() {
       : {};
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-zinc-950/85 via-zinc-900/60 to-black/85 text-zinc-100">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-zinc-950 via-zinc-900 to-black text-zinc-100">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-purple-600/60 via-fuchsia-500/40 to-amber-500/40 blur-3xl will-change-transform"
         aria-hidden
