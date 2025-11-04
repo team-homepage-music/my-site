@@ -37,6 +37,7 @@ body {
   background: radial-gradient(ellipse at 50% 120%, rgba(90, 10, 0, 0.75), rgba(5, 0, 0, 0.1) 70%);
 }
 
+/* Flame layers add intense motion with high contrast */
 .flame-layer {
   position: absolute;
   inset: -20%;
@@ -49,7 +50,7 @@ body {
   background-size: 160% 160%;
   filter: blur(48px);
   mix-blend-mode: screen;
-  opacity: 0.55;
+  opacity: 0.65;
   animation:
     flameWave 12s linear infinite,
     flamePulse 3.6s ease-in-out infinite,
@@ -59,7 +60,7 @@ body {
 }
 
 .flame-layer--mid {
-  opacity: 0.38;
+  opacity: 0.48;
   filter: blur(58px);
   animation-duration: 16s, 4.2s, 3s;
   background-image:
@@ -70,7 +71,7 @@ body {
 }
 
 .flame-layer--top {
-  opacity: 0.28;
+  opacity: 0.36;
   filter: blur(70px);
   animation-duration: 18s, 4.8s, 3.4s;
   background-image:
@@ -95,7 +96,7 @@ body {
   background-size: 200px 280px, 240px 260px, 220px 300px, 260px 220px;
   background-repeat: repeat;
   mix-blend-mode: screen;
-  opacity: 0.22;
+  opacity: 0.3;
   filter: blur(0.6px);
   animation: emberFloat 18s linear infinite;
   mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0.9) 65%, rgba(0, 0, 0, 0.05) 100%);
