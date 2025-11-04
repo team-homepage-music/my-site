@@ -103,3 +103,42 @@ export const contactLinks: ContactLink[] = [
   { label: "YouTube", handle: "ライブセッション", href: "#" },
   { label: "Management", handle: "booking@hibikimusic.com", href: "mailto:booking@hibikimusic.com" },
 ];
+
+export type BlogPost = {
+  title: string;
+  slug: string;
+  publishedAt: string;
+  excerpt: string;
+  category: string;
+  readingTimeMinutes: number;
+};
+
+export const blogPosts: BlogPost[] = [
+  {
+    title: "夜明け前のスタジオ日記",
+    slug: "studio-dawn-journal",
+    publishedAt: "2024-05-28",
+    excerpt:
+      "新作EPのレコーディングが夜明け前に差し掛かったとき、テープに残った偶然のハミングが曲の核になった話。",
+    category: "制作メモ",
+    readingTimeMinutes: 4,
+  },
+  {
+    title: "黄昏サウンドの作り方",
+    slug: "twilight-sound-notes",
+    publishedAt: "2024-04-17",
+    excerpt:
+      "ライブで使用しているロータリースピーカーとアナログディレイを組み合わせ、空気感を描き出すためのセットアップ。",
+    category: "機材",
+    readingTimeMinutes: 6,
+  },
+  {
+    title: "ベルリン滞在で見つけた音",
+    slug: "berlin-field-notes",
+    publishedAt: "2024-03-02",
+    excerpt:
+      "路面電車のモーター音や雨上がりの水たまりの反射から新曲のモチーフが生まれた、ベルリン滞在中のフィールドレコーディング記録。",
+    category: "旅",
+    readingTimeMinutes: 5,
+  },
+];

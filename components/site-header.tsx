@@ -9,6 +9,7 @@ const navLinks = [
   { label: "アバウト", href: "/about" },
   { label: "ミュージック", href: "/music" },
   { label: "ショー", href: "/shows" },
+  { label: "ブログ", href: "/blog" },
   { label: "コンタクト", href: "/connect" },
 ];
 
