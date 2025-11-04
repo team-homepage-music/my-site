@@ -50,24 +50,26 @@ export function BgmPlayer() {
   };
 
   return (
-    <div className="pointer-events-none fixed bottom-6 right-6 z-50 flex max-w-xs flex-col items-end gap-2 text-sm text-white/80 sm:right-10">
+    <div className="pointer-events-none fixed bottom-6 right-6 z-50 flex max-w-xs flex-col items-end gap-2 text-sm text-slate-700 sm:right-10">
       <button
         type="button"
         onClick={togglePlayback}
-        className={`pointer-events-auto inline-flex items-center gap-2 rounded-full border px-4 py-2 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+        className={`pointer-events-auto inline-flex items-center gap-2 rounded-full border px-4 py-2 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500 ${
           isPlaying
-            ? "border-emerald-400/60 bg-emerald-500/20 text-white shadow-lg shadow-emerald-500/30"
-            : "border-white/25 bg-white/10 hover:border-white/50 hover:bg-white/20"
+            ? "border-emerald-400/60 bg-emerald-100 text-emerald-600 shadow"
+            : "border-slate-300 bg-white text-slate-800 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50"
         }`}
         aria-pressed={isPlaying}
       >
         <span
-          className={`h-2 w-2 rounded-full ${isPlaying ? "bg-emerald-400 animate-pulse" : "bg-white/60"}`}
+          className={`h-2 w-2 rounded-full ${isPlaying ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`}
           aria-hidden
         />
         <span>{isPlaying ? "BGM停止" : "BGM再生"}</span>
       </button>
-      {loadError && <p className="pointer-events-auto rounded-2xl bg-black/70 px-3 py-2 text-xs text-red-300">{loadError}</p>}
+      {loadError && (
+        <p className="pointer-events-auto rounded-2xl bg-rose-100 px-3 py-2 text-xs text-rose-600 shadow-sm">{loadError}</p>
+      )}
       <audio ref={audioRef} src={BGM_SOURCE} loop preload="auto" />
     </div>
   );
