@@ -15,6 +15,7 @@ type CalendarDay = {
   iso: string;
   label: number;
   isCurrentMonth: boolean;
+  dayOfWeek: number;
   shows: typeof upcomingShows;
 };
 
@@ -75,6 +76,7 @@ function buildCalendarMonths(): CalendarMonth[] {
             iso,
             label: cursor.getUTCDate(),
             isCurrentMonth: cursor.getUTCMonth() === monthIndex,
+            dayOfWeek: cursor.getUTCDay(),
             shows: showsByDate.get(iso) ?? [],
           });
           cursor.setUTCDate(cursor.getUTCDate() + 1);
@@ -188,18 +190,43 @@ export default function ShowsPage() {
               <div className="grid grid-cols-7 gap-px bg-white/10">
                 {activeMonth.weeks.flat().map((day, index) => {
                   const hasShows = day.shows.length > 0;
+                  const isWeekend = day.dayOfWeek === 0 || day.dayOfWeek === 6;
+                  const dayBackground = day.isCurrentMonth ? "bg-black/40 text-white/80" : "bg-black/20 text-white/40";
+                  const weekendTint =
+                    day.dayOfWeek === 0
+                      ? "bg-gradient-to-br from-rose-500/15 via-transparent to-transparent"
+                      : day.dayOfWeek === 6
+                        ? "bg-gradient-to-br from-sky-500/15 via-transparent to-transparent"
+                        : "";
+                  const borderStyle = hasShows
+                    ? "ring-1 ring-purple-400/60"
+                    : day.dayOfWeek === 0
+                      ? "border border-rose-400/40"
+                      : day.dayOfWeek === 6
+                        ? "border border-sky-400/35"
+                        : "border border-transparent";
+                  const dayLabelTone = day.isCurrentMonth ? "text-white" : "text-white/60";
                   return (
                     <div
                       key={`${activeMonth.key}-${day.iso}-${index}`}
-                      className={`min-h-[96px] bg-black/40 p-3 text-xs transition ${
-                        day.isCurrentMonth ? "text-white/80" : "bg-black/20 text-white/40"
-                      } ${hasShows ? "ring-1 ring-purple-400/60" : "border border-transparent"}`}
+                      className={`min-h-[96px] p-3 text-xs transition ${dayBackground} ${weekendTint} ${borderStyle}`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold text-white">{day.label}</span>
+                        <span className={`text-sm font-semibold ${dayLabelTone}`}>{day.label}</span>
                         {hasShows && (
                           <span className="rounded-full bg-purple-400/20 px-2 py-0.5 text-[10px] uppercase tracking-[0.3em] text-purple-100">
                             公演
+                          </span>
+                        )}
+                        {!hasShows && isWeekend && (
+                          <span
+                            className={`rounded-full border px-1.5 py-0.5 text-[10px] uppercase tracking-[0.3em] ${
+                              day.dayOfWeek === 0
+                                ? "border-rose-300/60 text-rose-100"
+                                : "border-sky-300/60 text-sky-100"
+                            }`}
+                          >
+                            {day.dayOfWeek === 0 ? "sun" : "sat"}
                           </span>
                         )}
                       </div>
