@@ -95,7 +95,7 @@ export default function VisitorsDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#201914] via-[#17120f] to-[#0f0b09] px-6 pb-16 pt-36 text-amber-50 sm:px-10 sm:pt-40 lg:px-16 lg:pt-44">
+    <div className="min-h-screen bg-gradient-to-b from-[#05080f] via-[#0b1022] to-[#121b2f] px-6 pb-16 pt-36 text-zinc-100 sm:px-10 sm:pt-40 lg:px-16 lg:pt-44">
       <div className="mx-auto w-full max-w-5xl space-y-10 rounded-3xl border border-white/10 bg-white/5 p-10 shadow-2xl shadow-purple-900/50 backdrop-blur-sm">
         <header className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">来訪者ダッシュボード</h1>

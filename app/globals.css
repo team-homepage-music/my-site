@@ -25,86 +25,91 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.music-sheet {
+.star-field {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(248, 244, 236, 0.05), rgba(110, 104, 92, 0.08)),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(240, 232, 214, 0.08) 0px,
-      rgba(240, 232, 214, 0.08) 5px,
-      transparent 5px,
-      transparent 24px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(37, 31, 23, 0.35) 0px,
-      rgba(37, 31, 23, 0.35) 1px,
-      transparent 1px,
-      transparent 6px
-    ),
-    repeating-linear-gradient(
-      to right,
-      rgba(37, 31, 23, 0.12) 0px,
-      rgba(37, 31, 23, 0.12) 1px,
-      transparent 1px,
-      transparent 96px
-    );
   mix-blend-mode: screen;
 }
 
-.music-sheet__overlay {
+.star-field__star {
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 50% 20%, rgba(249, 244, 233, 0.2), transparent 45%),
-    linear-gradient(180deg, rgba(10, 14, 22, 0.68), rgba(6, 8, 15, 0.85));
-  mix-blend-mode: multiply;
-  opacity: 0.85;
+  top: var(--star-top);
+  left: var(--star-left);
+  width: var(--star-size);
+  height: var(--star-size);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%);
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 12px rgba(120, 170, 255, 0.3);
+  opacity: var(--star-opacity, 0.6);
+  transform: translateZ(0);
+  animation: starTwinkle var(--star-duration, 3s) ease-in-out var(--star-delay, 0s) infinite;
 }
 
-.music-sheet__note {
-  position: absolute;
-  top: var(--note-top);
-  left: var(--note-left);
-  transform: translate(-50%, -50%) scale(var(--note-scale, 1)) rotate(var(--note-rotate, 0deg));
-  font-size: clamp(1.1rem, 1.8vw, 2.3rem);
-  color: rgba(36, 28, 18, 0.85);
-  text-shadow: 0 2px 6px rgba(249, 240, 214, 0.3);
-  font-family: "Times New Roman", "Noto Serif JP", serif;
-  opacity: 0;
-  animation: noteFloat var(--note-duration, 10s) ease-in-out infinite;
-  animation-delay: var(--note-delay, 0s);
-}
-
-.music-sheet__note::before {
-  content: attr(data-symbol);
-  display: block;
-}
-
-@keyframes noteFloat {
-  0% {
-    transform: translate(-50%, -50%) scale(var(--note-scale, 1)) rotate(var(--note-rotate, 0deg));
-    opacity: 0;
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: var(--star-opacity, 0.6);
+    transform: scale(1);
   }
-  12% {
-    opacity: 0.8;
+  40% {
+    opacity: calc(var(--star-opacity, 0.6) * 0.25);
+    transform: scale(0.45);
   }
   55% {
-    transform: translate(calc(-50% + 6px), calc(-50% - 8px)) scale(var(--note-scale, 1.05))
-      rotate(calc(var(--note-rotate, 0deg) + 6deg));
+    opacity: calc(var(--star-opacity, 0.6) * 0.6);
+    transform: scale(0.8);
+  }
+}
+
+.shooting-stars {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+
+.shooting-stars__streak {
+  position: absolute;
+  top: -20vh;
+  left: var(--streak-offset);
+  width: 2px;
+  height: var(--streak-length, 140px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  border-radius: 999px;
+  opacity: 0;
+  transform: translate3d(0, 0, 0) rotate(var(--streak-angle, 24deg));
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.65));
+  animation: shootingFall var(--streak-duration, 7s) linear var(--streak-delay, 0s) infinite;
+}
+
+.shooting-stars__streak::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 60%);
+  filter: blur(0.2px);
+}
+
+@keyframes shootingFall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -40vh, 0) rotate(var(--streak-angle, 24deg));
+  }
+  10% {
     opacity: 1;
   }
-  88% {
-    opacity: 0.3;
-  }
   100% {
-    transform: translate(calc(-50% - 4px), calc(-50% - 18px)) scale(var(--note-scale, 0.95))
-      rotate(calc(var(--note-rotate, 0deg) - 4deg));
     opacity: 0;
+    transform: translate3d(-38vw, 135vh, 0) rotate(var(--streak-angle, 24deg));
   }
 }

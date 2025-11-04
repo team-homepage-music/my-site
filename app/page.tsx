@@ -81,9 +81,9 @@ export default function Home() {
       : {};
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#2f261e] via-[#1f1a15] to-[#120e0a] text-amber-50">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-[#0b1022] via-[#121b2f] to-[#05080f] text-zinc-100">
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-amber-400/45 via-amber-200/25 to-transparent blur-3xl will-change-transform"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-gradient-to-br from-purple-600/60 via-fuchsia-500/40 to-amber-500/40 blur-3xl will-change-transform"
         aria-hidden
       />
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-20 px-6 pb-24 pt-40 sm:gap-24 sm:px-10 sm:pb-28 sm:pt-44 lg:gap-28 lg:px-12 lg:pt-48">
