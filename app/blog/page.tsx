@@ -1,3 +1,4 @@
+import { BlogComments } from "@/components/blog-comments";
 import { blogPosts } from "@/lib/content";
 
 function formatPublishedDate(dateString: string) {
@@ -28,28 +29,26 @@ export default function BlogPage() {
           </p>
         </header>
 
-        <section className="space-y-6">
+        <section className="space-y-10">
           {blogPosts.map((post) => (
-            <article
-              key={post.slug}
-              className="group relative overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur transition hover:-translate-y-1 hover:border-white/35 sm:p-8"
-            >
-              <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/60">
-                <span className="rounded-full border border-white/30 px-3 py-1 text-[11px] text-white/80">{post.category}</span>
-                <span>{formatPublishedDate(post.publishedAt)}</span>
-                <span>・</span>
-                <span>{post.readingTimeMinutes}分で読了</span>
-              </div>
-              <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-white/90 sm:text-3xl">{post.title}</h2>
-              <p className="mt-4 text-sm leading-relaxed text-white/75">{post.excerpt}</p>
-              <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/80">
-                <span>記事を読む（準備中）</span>
-                <span aria-hidden className="translate-x-0 transition group-hover:translate-x-1">
-                  →
-                </span>
-              </div>
-              <div className="pointer-events-none absolute -right-20 -top-24 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400/20 via-fuchsia-400/15 to-emerald-300/15 blur-3xl transition-opacity group-hover:opacity-100" />
-            </article>
+            <div key={post.slug} className="space-y-6">
+              <article className="group relative overflow-hidden rounded-3xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-purple-900/40 backdrop-blur transition hover:-translate-y-1 hover:border-white/35 sm:p-8">
+                <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/60">
+                  <span className="rounded-full border border-white/30 px-3 py-1 text-[11px] text-white/80">{post.category}</span>
+                  <span>{formatPublishedDate(post.publishedAt)}</span>
+                  <span>・</span>
+                  <span>{post.readingTimeMinutes}分で読了</span>
+                </div>
+                <h2 className="mt-4 text-2xl font-semibold text-white group-hover:text-white/90 sm:text-3xl">{post.title}</h2>
+                <p className="mt-4 text-sm leading-relaxed text-white/75">{post.excerpt}</p>
+                <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white/80">
+                  <span>記事を読む（準備中）</span>
+                  <span aria-hidden className="translate-x-0 transition group-hover:translate-x-1">→</span>
+                </div>
+                <div className="pointer-events-none absolute -right-20 -top-24 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400/20 via-fuchsia-400/15 to-emerald-300/15 blur-3xl transition-opacity group-hover:opacity-100" />
+              </article>
+              <BlogComments slug={post.slug} />
+            </div>
           ))}
         </section>
       </main>
