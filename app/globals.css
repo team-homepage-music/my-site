@@ -20,7 +20,147 @@
 }
 
 body {
-  background: var(--background);
+  position: relative;
+  min-height: 100vh;
+  background: #050505;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.flame-background {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 120%, rgba(90, 10, 0, 0.75), rgba(5, 0, 0, 0.1) 70%);
+}
+
+.flame-layer {
+  position: absolute;
+  inset: -20%;
+  transform-origin: 50% 90%;
+  background-image:
+    radial-gradient(circle at 50% 90%, rgba(255, 160, 40, 0.65) 0%, rgba(255, 120, 30, 0.35) 35%, transparent 70%),
+    radial-gradient(circle at 20% 75%, rgba(255, 210, 140, 0.45) 0%, rgba(255, 150, 60, 0.2) 35%, transparent 65%),
+    radial-gradient(circle at 80% 70%, rgba(255, 110, 20, 0.4) 0%, rgba(200, 50, 10, 0.2) 45%, transparent 75%),
+    radial-gradient(ellipse at 50% 120%, rgba(140, 20, 0, 0.55) 0%, rgba(40, 5, 0, 0.05) 75%);
+  background-size: 160% 160%;
+  filter: blur(48px);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  animation:
+    flameWave 18s linear infinite,
+    flamePulse 6s ease-in-out infinite,
+    flameFlicker 5s ease-in-out infinite;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.4) 18%, rgba(0, 0, 0, 0.9) 62%, rgba(0, 0, 0, 0.2) 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.4) 18%, rgba(0, 0, 0, 0.9) 62%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+.flame-layer--mid {
+  opacity: 0.38;
+  filter: blur(58px);
+  animation-duration: 23s, 7.5s, 6s;
+  background-image:
+    radial-gradient(circle at 45% 88%, rgba(255, 190, 80, 0.5) 0%, rgba(255, 120, 35, 0.25) 35%, transparent 70%),
+    radial-gradient(circle at 25% 70%, rgba(255, 240, 200, 0.35) 0%, rgba(255, 170, 70, 0.2) 40%, transparent 60%),
+    radial-gradient(circle at 75% 68%, rgba(255, 150, 40, 0.35) 0%, rgba(200, 70, 10, 0.18) 45%, transparent 75%),
+    radial-gradient(ellipse at 50% 120%, rgba(120, 25, 0, 0.45) 0%, rgba(30, 5, 0, 0.08) 70%);
+}
+
+.flame-layer--top {
+  opacity: 0.28;
+  filter: blur(70px);
+  animation-duration: 28s, 9s, 7.5s;
+  background-image:
+    radial-gradient(circle at 50% 95%, rgba(255, 210, 120, 0.4) 0%, rgba(255, 160, 60, 0.2) 35%, transparent 70%),
+    radial-gradient(circle at 15% 75%, rgba(255, 180, 100, 0.3) 0%, rgba(255, 120, 50, 0.15) 40%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(255, 180, 80, 0.3) 0%, rgba(200, 80, 30, 0.15) 45%, transparent 75%),
+    radial-gradient(ellipse at 50% 125%, rgba(110, 20, 0, 0.4) 0%, rgba(25, 5, 0, 0.05) 75%);
+}
+
+.flame-layer--base {
+  animation-duration: 20s, 6.5s, 5s;
+}
+
+.flame-embers {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 3px at 10% 90%, rgba(255, 210, 150, 0.55) 0%, transparent 70%),
+    radial-gradient(2px 2px at 30% 85%, rgba(255, 180, 120, 0.4) 0%, transparent 75%),
+    radial-gradient(3px 4px at 65% 80%, rgba(255, 160, 90, 0.45) 0%, transparent 70%),
+    radial-gradient(2px 3px at 85% 88%, rgba(255, 200, 130, 0.4) 0%, transparent 75%);
+  background-size: 200px 280px, 240px 260px, 220px 300px, 260px 220px;
+  background-repeat: repeat;
+  mix-blend-mode: screen;
+  opacity: 0.22;
+  filter: blur(0.6px);
+  animation: emberFloat 26s linear infinite;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0.9) 65%, rgba(0, 0, 0, 0.05) 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0.9) 65%, rgba(0, 0, 0, 0.05) 100%);
+}
+
+@keyframes flameWave {
+  0% {
+    transform: translate3d(0, 4%, 0) scale(1.05, 1.1);
+  }
+  35% {
+    transform: translate3d(0, -2%, 0) scale(0.98, 1.08);
+  }
+  65% {
+    transform: translate3d(0, -4%, 0) scale(1.02, 1.12);
+  }
+  100% {
+    transform: translate3d(0, 4%, 0) scale(1.05, 1.1);
+  }
+}
+
+@keyframes flamePulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  45% {
+    opacity: 0.72;
+  }
+  55% {
+    opacity: 0.78;
+  }
+}
+
+@keyframes flameFlicker {
+  0%,
+  100% {
+    background-position: 50% 60%, 30% 70%, 70% 65%, 50% 100%;
+  }
+  30% {
+    background-position: 52% 58%, 28% 66%, 68% 63%, 50% 100%;
+  }
+  60% {
+    background-position: 48% 62%, 32% 72%, 72% 67%, 50% 100%;
+  }
+  85% {
+    background-position: 51% 59%, 27% 68%, 69% 64%, 50% 100%;
+  }
+}
+
+@keyframes emberFloat {
+  0% {
+    background-position: 0% 100%, 15% 100%, 40% 100%, 70% 100%;
+    opacity: 0.18;
+  }
+  40% {
+    background-position: 5% 55%, 20% 50%, 38% 45%, 68% 58%;
+    opacity: 0.28;
+  }
+  70% {
+    background-position: 3% 35%, 18% 30%, 35% 25%, 66% 38%;
+    opacity: 0.22;
+  }
+  100% {
+    background-position: 0% 0%, 15% -10%, 30% -20%, 60% -5%;
+    opacity: 0.16;
+  }
 }
